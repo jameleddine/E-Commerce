@@ -1,0 +1,8 @@
+.affected{
+    background:green;
+    color:white;
+}
+.unkown{
+    background: red;
+    color:white;
+}
