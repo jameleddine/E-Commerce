@@ -1,0 +1,33 @@
+
+<div class="constainer">
+  <h1>Liste des Produits</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Nom</td>
+        <td>Catégorie</td>
+        <td>Réference</td>
+        <td>Prix</td>
+        <td>Quantité</td>
+        <td>Owner</td>
+        <td>Status</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produit of listProduits">
+        <td>{{produit.name}}</td>
+        <td>{{produit.categorie}}</td>
+        <td>{{produit.reference}}</td>
+        <td>{{produit.prix}}</td>
+        <td>{{produit.quantite}}</td>
+        <td>{{produit.proprietaire}}</td>
+        <td>{{produit.status}}</td>
+        <td>
+          <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="getDetail(produit._id)"></i>
+          <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteProduct(produit._id)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

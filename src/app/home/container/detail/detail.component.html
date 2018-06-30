@@ -1,0 +1,30 @@
+
+
+<h1>Detail Produit</h1>
+
+<div class="form-group">
+  <label>Product Name</label>
+  <input type="text" [(ngModel)]="objectProduit.name" class="form-control">
+</div>
+
+<div class="form-group">
+  <label>Product Category</label>
+  <input type="text" [(ngModel)]="objectProduit.categorie" class="form-control">
+</div>
+
+<div class="form-group">
+  <label>Product Reference</label>
+  <input type="text" [(ngModel)]="objectProduit.reference" class="form-control">
+</div>
+
+<div class="form-group">
+  <label>Product Price</label>
+  <input type="text" [(ngModel)]="objectProduit.prix" class="form-control">
+</div>
+
+<div class="form-group">
+  <label>Product Owner</label>
+  <input type="text" [(ngModel)]="objectProduit.proprietaire" class="form-control">
+</div>
+
+<button class="btn btn-primary" (click)="updateProduct()">Update Produit</button>
