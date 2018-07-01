@@ -2,23 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import {CrudService} from "./../../../services/crud.service";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  providers:[CrudService]
 })
 export class DashboardComponent implements OnInit {
  listProduits : any = [];
-  constructor(private http:HttpClient,private route : Router) { }
+  constructor(private http:HttpClient,private route : Router, private crud:CrudService) { }
 
   ngOnInit() {
     this.getAll()
   }
   getAll(){
-    this.http.get('http://localhost:3000/produits').subscribe(data =>{
+    this.crud.getAllProducts().subscribe(data =>{
       this.listProduits = data;
     })
+    // this.http.get('http://localhost:3000/produits').subscribe(data =>{
+    //   this.listProduits = data;
+    // })
   }
 
   getDetail(id){
@@ -38,10 +43,15 @@ export class DashboardComponent implements OnInit {
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
-        this.http.delete("http://localhost:3000/produits/"+id).subscribe(data=>{
+
+        this.crud.deleteProduct(id).subscribe(data=>{
           console.log(data);
           this.getAll();
         });
+        // this.http.delete("http://localhost:3000/produits/"+id).subscribe(data=>{
+        //   console.log(data);
+        //   this.getAll();
+        // });
       } else {
         swal("Your imaginary file is safe!");
       }

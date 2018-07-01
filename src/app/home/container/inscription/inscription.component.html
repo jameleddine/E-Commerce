@@ -1,3 +1,4 @@
+<form novalidate [formGroup]="myform">
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
@@ -14,17 +15,17 @@
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
                 <input type="text" name="name" class="form-control" id="name"
-                       placeholder="John Doe" required autofocus [(ngModel)]="user.name">
+                       placeholder="John Doe" required autofocus [(ngModel)]="user.name" formControlName="namef">
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="form-control-feedback">
-                <span class="text-danger align-middle">
-                    <!-- Put name validation error messages here -->
-                </span>
+    <div class="col-md-3" *ngIf="myform.controls.namef.invalid&&(myform.controls.namef.dirty || myform.controls.namef.touched)">
+            <div class="form-control-feedback">
+                    <span class="text-danger align-middle">
+                        <i class="fa fa-close"> Name invalid</i>
+                    </span>
+            </div>
         </div>
-    </div>
 </div>
 <div class="row">
     <div class="col-md-3 field-label-responsive">
@@ -35,17 +36,17 @@
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
                 <input type="text" name="email" class="form-control" id="email"
-                       placeholder="you@example.com" required autofocus [(ngModel)]="user.email">
+                       placeholder="you@example.com" required autofocus [(ngModel)]="user.email" formControlName="emailf">
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="form-control-feedback">
-                <span class="text-danger align-middle">
-                    <!-- Put e-mail validation error messages here -->
-                </span>
+    <div class="col-md-3" *ngIf="myform.controls.emailf.invalid&&(myform.controls.emailf.dirty || myform.controls.emailf.touched)">
+            <div class="form-control-feedback">
+                    <span class="text-danger align-middle">
+                        <i class="fa fa-close"> Email invalid or empty</i>
+                    </span>
+            </div>
         </div>
-    </div>
 </div>
 <div class="row">
     <div class="col-md-3 field-label-responsive">
@@ -56,11 +57,11 @@
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
                 <input type="password" name="password" class="form-control" id="password"
-                       placeholder="Password" required [(ngModel)]="user.password">
+                       placeholder="Password" required [(ngModel)]="user.password" formControlName="passwordf">
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3" *ngIf="myform.controls.passwordf.invalid&&(myform.controls.passwordf.dirty || myform.controls.passwordf.touched)">
         <div class="form-control-feedback">
                 <span class="text-danger align-middle">
                     <i class="fa fa-close"> Example Error Message</i>
@@ -79,14 +80,22 @@
                     <i class="fa fa-repeat"></i>
                 </div>
                 <input type="password" name="password-confirmation" class="form-control"
-                       id="password-confirm" placeholder="Password" required>
+                       id="password-confirm" placeholder="Password" required formControlName="cpasswordf" [(ngModel)]="cpassword">
             </div>
         </div>
     </div>
+    <div class="col-md-3" *ngIf="myform.controls.cpasswordf.invalid&&(myform.controls.cpasswordf.dirty || myform.controls.cpasswordf.touched)||(cpassword!=user.password)">
+            <div class="form-control-feedback">
+                    <span class="text-danger align-middle">
+                        <i class="fa fa-close"> password invalid or not similar</i>
+                    </span>
+            </div>
+        </div>
 </div>
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-        <button type="submit" class="btn btn-success" (click)="saveUser()"><i class="fa fa-user-plus"></i> Register</button>
+        <button type="submit" class="btn btn-success" [disabled]='myform.invalid' (click)="saveUser()"><i class="fa fa-user-plus"></i> Register</button>
     </div>
 </div>
+</form>

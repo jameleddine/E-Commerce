@@ -15,6 +15,16 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['poc']">PoC</a>
       </li>
+      <li>
+         
+      </li>
     </ul>
+    <ul class="nav justify-content-end">
+        <li class="nav-item"><select class="form-control mr-sm-2" #langSelect (change)="translate.use(langSelect.value)">
+            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+          </select>
+        </li>
+    </ul>
+    
   </nav>
   
